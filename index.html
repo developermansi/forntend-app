@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>Onclick increase Table Rows</title>
+<script type="text/javascript">
+function addRows(){ 
+	var table = document.getProductsById('Protbl');
+	var rowCount = table.rows.length;
+	var cellCount = table.rows[0].cells.length; 
+	var row = table.insertRow(rowCount);
+	for(var i =0; i <= cellCount; i++){
+		var cell = 'cell'+i;
+		cell = row.insertCell(i);
+		var copycel = document.getProductsById('col'+i).innerHTML;
+		cell.innerHTML=copycel;
+		if(i == 3){ 
+			var radioinput = document.getProductsById('col3').getProductsByTagName('input'); 
+			for(var j = 0; j <= radioinput.length; j++) { 
+				if(radioinput[j].type == 'radio') { 
+					var rownum = rowCount;
+					radioinput[j].name = 'gender['+rownum+']';
+				}
+			}
+		}
+	}
+}
+function deleteRows(){
+	var table = document.getProductsById('Protbl');
+	var rowCount = table.rows.length;
+	if(rowCount > '2'){
+		var row = table.deleteRow(rowCount-1);
+		rowCount--;
+	}
+	else{
+		alert('There should be atleast one row');
+	}
+}
+</script>
+</head>
+<body>
+<form action="#" method="post">    
+	<table id="Protbl">
+		<tr>
+			<th>Products Name</th>
+			<th>Price</th>
+			<th>Quantity</th>  
+		</tr> 
+		<tr> 
+			<td id="col0"><input type="text" name="Products[]" value="" /></td> 
+			<td id="col1"><input type="text" name="Price[]" value="" /></td> 
+			<td id="col2"> 
+			<select name="Products[]" id="Pro"> 
+			<option value="0">Select Products</option> 
+			<option value="1">cloths</option>
+			<option value="2">footwear</option>
+			<option value="3">laptops</option>
+            <option value="3">Books</option>
+            <option value="3">Phones</option>
+			</select> 
+		</tr>  
+	</table> 
+	<table> 
+		<tr> 
+			<td><input type="button" value="Add Row" onclick="addRows()" /></td> 
+			<td><input type="button" value="Delete Row" onclick="deleteRows()" /></td> 
+			<td><input type="submit" value="Submit" /></td> 
+		</tr>  
+	</table> 
+ </form> 
+</body> 
+</html>  
